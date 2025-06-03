@@ -82,9 +82,9 @@ export default function Home() {
         }
     }, [location]);
 
-    // const scrollToSection = (sectionId) => {
-    //     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
-    // }
+    const scrollToSection = (sectionId) => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
+    }
 
     return (
         <>
