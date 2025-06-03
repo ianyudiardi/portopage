@@ -1,8 +1,18 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 export default function Navbar() {
-    const scrollToSection = (sectionId) => {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleNavClick = (sectionId) => {
+        if (location.pathname === '/') {
+            // Already on /home, just scroll
+            const el = document.getElementById(sectionId);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // Navigate to /home#sectionId
+            navigate(`/#${sectionId}`);
+        }
     }
 
     return (
@@ -11,13 +21,13 @@ export default function Navbar() {
                 <div className="flex justify-between items-center py-4">
                     <div className="text-2xl font-bold text-orange-500">Portofolio</div>
                     <div className="hidden md:flex space-x-8">
-                        <button onClick={() => scrollToSection("home")} className="text-white hover:text-orange-500 transition-colors">
+                        <button onClick={() => handleNavClick("home")} className="text-white hover:text-orange-500 transition-colors">
                             Home
                         </button>
-                        <button onClick={() => scrollToSection("about")} className="text-white hover:text-orange-500 transition-colors">
+                        <button onClick={() => handleNavClick("about")} className="text-white hover:text-orange-500 transition-colors">
                             About
                         </button>
-                        <button onClick={() => scrollToSection("skills")} className="text-white hover:text-orange-500 transition-colors">
+                        <button onClick={() => handleNavClick("skills")} className="text-white hover:text-orange-500 transition-colors">
                             Skills
                         </button>
                         <Link to="/projects" className="text-white hover:text-orange-500 transition-colors">
@@ -26,7 +36,7 @@ export default function Navbar() {
                         <Link to='/duel' className="hover:text-orange-500 transition-colors">
                             Duelist Portofolio
                         </Link>
-                        <button onClick={() => scrollToSection("contact")} className="text-white hover:text-orange-500 transition-colors">
+                        <button onClick={() => handleNavClick("contact")} className="text-white hover:text-orange-500 transition-colors">
                             Contact
                         </button>
                     </div>

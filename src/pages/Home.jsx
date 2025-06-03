@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import { useEffect } from "react"
 import projects from "../data/projects.js"
+
 
 import SkillCard from "../components/cards/SkillCard"
 import ProjectCard from "../components/cards/ProjectCard"
+import ContactCards from "../components/cards/ContactCards.jsx"
 
 const skills = [
     {
@@ -43,12 +46,45 @@ const skills = [
     }
 ]
 
-
+const contacts = [
+    {
+        index: 1,
+        title: "Email",
+        description: "ianyudiardi@gmail.com",
+        icon: "https://cdn.simpleicons.org/gmail/orangered"
+    },
+    {
+        index: 2,
+        title: "GitHub",
+        description: "https://github.com/ianyudiardi",
+        icon: "https://cdn.simpleicons.org/github/orangered"
+    },
+    {
+        index: 3,
+        title: "LinkedIn",
+        description: "https://www.linkedin.com/in/ianyudiardi/",
+        icon: "linkedin.png"
+    },
+]
 
 export default function Home() {
-    const scrollToSection = (sectionId) => {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
-    }
+    const location = useLocation();
+
+    useEffect(() => {
+        const hash = location.hash.replace('#', '');
+        if (hash) {
+            const el = document.getElementById(hash);
+            if (el) {
+                setTimeout(() => {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }, 100); // slight delay to ensure element is rendered
+            }
+        }
+    }, [location]);
+
+    // const scrollToSection = (sectionId) => {
+    //     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
+    // }
 
     return (
         <>
@@ -57,7 +93,7 @@ export default function Home() {
                 <div className="max-w-4xl mx-auto text-center">
                     <div className="mb-8">
                         <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 flex items-center justify-center">
-                            <span className="text-4xl font-bold text-black">JD</span>
+                            <img src="ian.jpg" alt="" className="rounded-full" />
                         </div>
                     </div>
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
@@ -76,7 +112,7 @@ export default function Home() {
                         <button
                             onClick={() => scrollToSection("contact")}
                             variant="outline"
-                            className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-black px-8 py-3 text-lg rounded-lg transition-colors duration-300"
+                            className="bg-gray-900 text-orange-500 hover:bg-gray-800 hover:text-orange-500 px-8 py-3 text-lg rounded-lg transition-colors duration-300"
                         >
                             Get In Touch
                         </button>
@@ -111,35 +147,20 @@ export default function Home() {
                                 or sharing knowledge with the developer community.
                             </p>
                             <div className="flex space-x-4">
-                                <button
-                                    variant="outline"
-                                    size="icon"
-                                    className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-black"
-                                >
-                                    a
+                                <button onClick={() => window.open("https://github.com/ianyudiardi")} className="bg-orange-500 hover:bg-orange-600 size-10 flex items-center justify-center rounded-lg transition-colors duration-300">
+                                    <img height="32" width="32" src="https://cdn.simpleicons.org/github/black" />
                                 </button>
-                                <button
-                                    variant="outline"
-                                    size="icon"
-                                    className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-black"
-                                >
-                                    b
-                                </button>
-                                <button
-                                    variant="outline"
-                                    size="icon"
-                                    className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-black"
-                                >
-                                    c
+                                <button onClick={() => window.open("https://www.linkedin.com/in/ianyudiardi/")} className="bg-orange-500 hover:bg-orange-600 size-10 flex items-center justify-center rounded-lg transition-colors duration-300">
+                                    <img height="32" width="32" src="linkedinblack.png" />
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* skills */}
-            <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
+            < section id="skills" className="py-20 px-4 sm:px-6 lg:px-8" >
                 <h1 className="text-white text-4xl font-bold text-center mb-16">My <span className="text-orange-500">Skills</span></h1>
                 <div className="grid grid-cols-2 gap-2">
                     {skills.map((skill, index) => (
@@ -151,10 +172,10 @@ export default function Home() {
                         />
                     ))}
                 </div>
-            </section>
+            </section >
 
             {/* projects */}
-            <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+            < section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900" >
                 <div className="max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-2 text-white">
                         My <span className="text-orange-500">Projects</span>
@@ -170,6 +191,7 @@ export default function Home() {
                                 title={project.title}
                                 description={project.description}
                                 image={project.image}
+                                tech={project.tech}
                             />
                         ))}
                     </div>
@@ -182,11 +204,11 @@ export default function Home() {
                         </Link>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Contact */}
-            <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-4xl mx-auto text-center">
+            < section id="contact" className="py-20 px-4 sm:px-6 lg:px-8" >
+                <div className="max-w-6xl mx-auto text-center">
                     <h2 className="text-4xl font-bold mb-8">
                         Let's <span className="text-orange-500">Connect</span>
                     </h2>
@@ -195,23 +217,32 @@ export default function Home() {
                         bring your ideas to life.
                     </p>
                     <div className="grid md:grid-cols-3 gap-8 mb-12">
-                        {/* map contact cards here */}
+                        {/* contact cards start */}
+                        {contacts.map((contact) => (
+                            <ContactCards
+                                key={contact.index}
+                                title={contact.title}
+                                description={contact.description}
+                                icon={contact.icon}
+                            />
+                        ))}
+                        {/* contact cards end */}
                     </div>
-                    <button
-                        className="bg-orange-500 hover:bg-orange-600 text-black font-semibold px-8 py-3 text-lg rounded-lg"
-                        onClick={() => window.open("mailto:john.doe@example.com")}
-                    >
-                        <div className="flex items-center justify-center gap-2 rounded-lg">
-                            Send Message
-                        </div>
-                    </button>
                 </div>
-            </section>
+            </section >
 
             {/* footer */}
             < footer className="bg-gray-900 py-8 px-4 sm:px-6 lg:px-8 border-t border-gray-800" >
                 <div className="max-w-6xl mx-auto text-center">
                     <p className="text-white">© 2025 Fabian Nurdin. Built with React & Tailwind CSS.</p>
+                </div>
+                <div className="flex justify-center my-2 space-x-4">
+                    <button onClick={() => window.open("https://github.com/ianyudiardi")} className="bg-orange-500 hover:bg-orange-600 size-10 flex items-center justify-center rounded-lg transition-colors duration-300">
+                        <img height="32" width="32" src="https://cdn.simpleicons.org/github/black" />
+                    </button>
+                    <button onClick={() => window.open("https://www.linkedin.com/in/ianyudiardi/")} className="bg-orange-500 hover:bg-orange-600 size-10 flex items-center justify-center rounded-lg transition-colors duration-300">
+                        <img height="32" width="32" src="linkedinblack.png" />
+                    </button>
                 </div>
             </footer >
         </>
