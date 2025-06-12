@@ -10,7 +10,6 @@ import Home from './pages/Home'
 import Project from './pages/Project'
 import Duelist from './pages/Duelist'
 import ProjectDetails from './components/ProjectDetails'
-import DuelistDetail from './components/DuelistDetails'
 
 export default function App() {
   return (
