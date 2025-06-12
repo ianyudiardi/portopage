@@ -1,10 +1,18 @@
 const duelist = [
     {
         id: "cityduel-top-4",
-        title: "Top 4 Indonesia City Duel Yogyakarta",
+        title: "Indonesia City Duel Yogyakarta Top 4",
         description: "I achieved top 4 in the City Duel tournament held in Yogyakarta, showcasing my skills in competitive Yu-Gi-Oh! OCG.",
+        url: "https://roadoftheking.com/icd-2025-yogyakarta/",
         image: "cityduel.jpg"
     },
+    {
+        id: "aot-champion",
+        title: "Arnero Open Tournament Champion",
+        description: "I won the Arnero Open Tournament, demonstrating my strategic prowess and deck-building skills in a competitive environment.",
+        url: "https://www.facebook.com/dranero/posts/pfbid033bQdBG5ER5ea7xFswD7r8nvRNb99kdLm24gFuVebcYqrgVkMXb4TXJ5UdqMRDQQVl",
+        image: "aot.jpg"
+    }
 ]
 
 export default function Duelist() {
@@ -20,7 +28,7 @@ export default function Duelist() {
             </div>
 
             {duelist.map((duel) => (
-                <div key={duel.id} className="grid md:grid-cols-2 gap-12 items-center">
+                <div key={duel.id} className="grid md:grid-cols-2 gap-12 items-center mb-12">
                     <div>
                         <img
                             src={duel.image}
@@ -33,6 +41,9 @@ export default function Duelist() {
                         <p className="text-white mb-6 leading-relaxed">
                             {duel.description}
                         </p>
+                        <div className="overflow-clip text-ellipsis">
+                            <a href={duel.url} className="hover:text-orange-500 transition-colors duration-100">{duel.url}</a>
+                        </div>
                     </div>
                 </div>
             ))}

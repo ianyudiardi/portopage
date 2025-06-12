@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
 
 export default function ProjectCard({ projectId, title, description, tech }) {
+    // Split tech string into array if it's a string, otherwise use as is
+    const techArray = typeof tech === "string" ? tech.split(",").map(t => t.trim()).filter(Boolean) : Array.isArray(tech) ? tech : [];
+
     return (
         <div key={projectId} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-700">
             <img className="rounded-t-lg" src="https://picsum.photos/400" alt="" />
@@ -13,11 +16,12 @@ export default function ProjectCard({ projectId, title, description, tech }) {
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                     </svg>
                 </Link>
-                {/* to be edited into individual pills */}
                 <div className="flex flex-wrap gap-2 mt-2">
-                    <span className="px-3 py-1 bg-orange-500/20 text-orange-500 rounded-full text-sm">
-                        {tech} 
-                    </span>
+                    {techArray.map((item, idx) => (
+                        <span key={idx} className="px-3 py-1 bg-orange-500/20 text-orange-500 rounded-full text-sm">
+                            {item}
+                        </span>
+                    ))}
                 </div>
             </div>
         </div>

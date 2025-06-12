@@ -22,7 +22,6 @@ export default function App() {
         <Route path="/projects/" element={<Project />} />
         <Route path="/projects/:projectId" element={<ProjectDetails />} />
         <Route path="/duel" element={<Duelist/>} />
-        <Route path="/duelist/:duelistId" element={<DuelistDetail />} />
       </Routes>
     </BrowserRouter>
   )

@@ -19,7 +19,7 @@ export default function Navbar() {
         <nav className="fixed top-0 w-full bg-black/90 backdrop-blur-sm border-b border-orange-500/20 z-50">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center py-4">
-                    <div className="text-2xl font-bold text-orange-500">Portofolio</div>
+                    <button onClick={() => handleNavClick("home")} className="text-2xl font-bold text-orange-500 hover:text-orange-600">Portofolio</button>
                     <div className="hidden md:flex space-x-8">
                         <button onClick={() => handleNavClick("home")} className="text-white hover:text-orange-500 transition-colors">
                             Home
